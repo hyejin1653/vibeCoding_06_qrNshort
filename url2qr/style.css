@@ -55,6 +55,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
   font-family: var(--font-sans);
   color: var(--color-text-main);
   background-color: var(--color-bg-base);
@@ -64,9 +65,12 @@ html, body {
 
 body {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   /* 마우스 인터랙티브 다이내믹 그라데이션 배경 */
   background: 
     radial-gradient(circle 650px at var(--mouse-x) var(--mouse-y), var(--dynamic-accent-1) 0%, transparent 75%),
@@ -121,7 +125,8 @@ body {
   position: relative;
   z-index: 50;
   width: 100%;
-  padding: 18px 36px;
+  padding: clamp(10px, 1.6vh, 16px) clamp(20px, 3vw, 36px);
+  flex-shrink: 0;
 }
 
 .header-inner {
@@ -275,7 +280,9 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 10;
-  padding: 20px 24px 100px;
+  padding: 10px 24px clamp(20px, 3vh, 36px);
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* ==========================================================================
@@ -877,8 +884,20 @@ body {
     display: none;
   }
   
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+
+  body {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+  }
+
   .main-container {
     padding: 20px 16px 120px;
+    overflow: visible;
   }
   
   .main-heading {
@@ -912,5 +931,22 @@ body {
   .action-btn {
     padding: 8px 14px;
     font-size: 0.8rem;
+  }
+}
+
+/* 화면 높이가 작은 창(노트북 소형 화면 등)에서 내용 잘림 방지용 반응형 처리 */
+@media (max-height: 620px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+  body {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+  }
+  .main-container {
+    overflow: visible;
+    padding: 16px;
   }
 }

@@ -47,8 +47,9 @@
 
 html, body {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
   font-family: var(--font-sans);
   color: var(--color-text-main);
   background-color: var(--color-bg-base);
@@ -57,9 +58,12 @@ html, body {
 
 body {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background: 
     radial-gradient(circle 650px at var(--mouse-x) var(--mouse-y), var(--dynamic-accent-1) 0%, transparent 75%),
     radial-gradient(circle 700px at calc(100% - var(--mouse-x)) calc(100% - var(--mouse-y)), var(--dynamic-accent-2) 0%, transparent 70%),
@@ -108,7 +112,8 @@ body {
   position: relative;
   z-index: 50;
   width: 100%;
-  padding: 18px 36px;
+  padding: clamp(10px, 1.8vh, 16px) clamp(20px, 3vw, 36px);
+  flex-shrink: 0;
 }
 
 .header-inner {
@@ -134,8 +139,8 @@ body {
 }
 
 .logo-icon-badge {
-  width: 44px;
-  height: 44px;
+  width: clamp(38px, 4.5vh, 44px);
+  height: clamp(38px, 4.5vh, 44px);
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, #f5b800 0%, #ff9f1c 100%);
   display: flex;
@@ -147,7 +152,7 @@ body {
 }
 
 .logo-text {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--color-text-dark);
@@ -185,10 +190,10 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 18px;
+  padding: clamp(6px, 1vh, 8px) clamp(12px, 1.5vw, 18px);
   border-radius: var(--radius-full);
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--color-text-muted);
   transition: all 0.25s ease;
@@ -208,15 +213,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px 80px;
+  padding: 0 clamp(16px, 2vw, 24px);
+  min-height: 0;
+  overflow: hidden;
 }
 
 .hub-hero {
   width: 100%;
-  max-width: 1000px;
+  max-width: 960px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: clamp(12px, 2.2vh, 22px);
+  margin: auto 0;
 }
 
 .hero-header {
@@ -226,17 +234,17 @@ body {
 .pill-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
+  gap: 6px;
+  padding: 4px 14px;
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(245, 184, 0, 0.35);
   border-radius: var(--radius-full);
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 700;
   color: #b45309;
   letter-spacing: 0.04em;
-  margin-bottom: 16px;
+  margin-bottom: clamp(6px, 1vh, 10px);
   box-shadow: 0 4px 12px rgba(245, 184, 0, 0.12);
 }
 
@@ -256,12 +264,12 @@ body {
 }
 
 .hero-title {
-  font-size: 2.6rem;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.25;
   letter-spacing: -0.03em;
   color: var(--color-text-dark);
-  margin-bottom: 16px;
+  margin-bottom: clamp(6px, 0.9vh, 10px);
 }
 
 .highlight-text {
@@ -271,16 +279,16 @@ body {
 }
 
 .hero-desc {
-  font-size: 1.1rem;
+  font-size: clamp(0.84rem, 1.1vw, 0.95rem);
   color: var(--color-text-muted);
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 /* 카드 그리드 */
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(14px, 2vw, 24px);
 }
 
 .feature-card {
@@ -290,7 +298,7 @@ body {
   -webkit-backdrop-filter: blur(20px);
   border: 1.5px solid var(--color-bg-card-border);
   border-radius: var(--radius-xl);
-  padding: 38px 34px;
+  padding: clamp(18px, 2.4vh, 26px) clamp(20px, 2.4vw, 28px);
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
@@ -298,18 +306,18 @@ body {
 }
 
 .feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 30px 60px -15px rgba(180, 130, 20, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.95) inset;
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -12px rgba(180, 130, 20, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.95) inset;
 }
 
 .card-badge {
   position: absolute;
-  top: 24px;
-  right: 28px;
-  font-size: 0.72rem;
+  top: clamp(14px, 2vh, 20px);
+  right: clamp(16px, 2vw, 24px);
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: var(--radius-full);
   background: #fff8e1;
   color: #b45309;
@@ -323,55 +331,60 @@ body {
 }
 
 .card-icon-box {
-  width: 68px;
-  height: 68px;
-  border-radius: var(--radius-lg);
+  width: clamp(44px, 5.2vh, 56px);
+  height: clamp(44px, 5.2vh, 56px);
+  border-radius: var(--radius-md);
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
   color: #b45309;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 22px;
+  margin-bottom: clamp(10px, 1.4vh, 16px);
   border: 1px solid rgba(245, 184, 0, 0.4);
-  box-shadow: 0 8px 20px rgba(245, 184, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(245, 184, 0, 0.18);
+}
+
+.card-icon-box svg {
+  width: clamp(24px, 3vh, 30px);
+  height: clamp(24px, 3vh, 30px);
 }
 
 .card-icon-box.green-icon {
   background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
   color: #059669;
   border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.18);
 }
 
 .card-title {
-  font-size: 1.45rem;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
   font-weight: 800;
   color: var(--color-text-dark);
   letter-spacing: -0.02em;
-  margin-bottom: 10px;
+  margin-bottom: clamp(4px, 0.8vh, 8px);
 }
 
 .card-desc {
-  font-size: 0.96rem;
+  font-size: clamp(0.82rem, 1vw, 0.88rem);
   color: var(--color-text-muted);
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.45;
+  margin-bottom: clamp(10px, 1.4vh, 16px);
 }
 
 .card-feature-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 28px;
+  gap: clamp(4px, 0.7vh, 8px);
+  margin-bottom: clamp(12px, 1.8vh, 20px);
   flex: 1;
 }
 
 .card-feature-list li {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.88rem;
+  gap: 7px;
+  font-size: clamp(0.78rem, 1vw, 0.84rem);
   font-weight: 600;
   color: #334155;
 }
@@ -388,11 +401,11 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 14px 24px;
+  gap: 8px;
+  padding: clamp(10px, 1.4vh, 12px) 20px;
   border-radius: var(--radius-md);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: clamp(0.88rem, 1.1vw, 0.96rem);
   font-weight: 800;
   letter-spacing: -0.01em;
   transition: all 0.25s ease;
@@ -428,34 +441,51 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-top: 20px;
+  gap: clamp(4px, 0.6vh, 8px);
+  padding: clamp(6px, 1vh, 12px) 20px clamp(8px, 1.2vh, 16px);
+  flex-shrink: 0;
 }
 
 .tech-tag-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .tech-tag {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--color-text-subtle);
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(226, 232, 240, 0.8);
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
 }
 
 .copyright {
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   color: var(--color-text-subtle);
 }
 
-/* 반응형 */
-@media (max-width: 640px) {
+/* 반응형 모바일 */
+@media (max-width: 768px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+
+  body {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+  }
+
+  .main-container {
+    padding: 20px 16px 40px;
+    overflow: visible;
+  }
+
   .app-header {
     padding: 14px 18px;
   }
@@ -476,11 +506,11 @@ body {
   }
 
   .hero-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   .hero-desc {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
 
   .feature-grid {
@@ -488,6 +518,23 @@ body {
   }
 
   .feature-card {
-    padding: 26px 20px;
+    padding: 22px 18px;
+  }
+}
+
+/* 화면 높이가 작은 창(노트북 소형 화면 등)에서 내용 잘림 방지용 반응형 처리 */
+@media (max-height: 620px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+  body {
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+  }
+  .main-container {
+    overflow: visible;
+    padding: 20px 16px;
   }
 }
